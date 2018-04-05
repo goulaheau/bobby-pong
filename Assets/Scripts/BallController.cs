@@ -13,6 +13,7 @@ public class BallController : MonoBehaviour
     public TrailRenderer Trail;
     public ParticleSystem Goal1ParticleSystem;
     public ParticleSystem Goal2ParticleSystem;
+    public AudioSource HitSound;
 
     public static bool Finished = true;
 
@@ -96,9 +97,14 @@ public class BallController : MonoBehaviour
 
     private void PaddleCollisionAction(Collision other)
     {
+        if (!Finished)
+        {
+            HitSound.Play();
+        }
+        
         ChangeBallSpeed();
 
-        ChangeBallDirection(other);
+        ChangeBallDirection(other);        
     }
 
     private void ChangeBallSpeed()
